@@ -6,9 +6,9 @@ This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
 
 I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
 
-`die_factors` takes factors variables in a dataframe and convert them to characters variables. The default functionality is to take all the factor variables in a given dataframe and convert them to character variables. You can target (and ignore) factor variables by specifying the variable names when calling the function.
+`die_factors` takes factors variables in a dataframe and converts them to characters variables. The default functionality is to take all the factor variables in a given dataframe and convert them to character variables. You can target (and ignore) factor variables by specifying the variable names when calling the function.
 
-`live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function.
+`live_factors` takes character variables in a dataframe and converts them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function.
 
 Installation
 ------------
@@ -20,7 +20,7 @@ devtools::install_github("wmhall/foofactors")
 `die_factors` usage
 -------------------
 
-The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables. Start by loading the `foofactors` package and the `gapminder` package.
+The following example uses `die_factors` to convert all the factor variables in the gapminder data frame into character variables. Start by loading the `foofactors` package and the `gapminder` package.
 
 ``` r
 library(foofactors)
@@ -65,7 +65,7 @@ We can target specific variables with `die_factors` by specifying them by name.
 my_new_df <- die_factors(gapminder, "country")
 ```
 
-Now `die_factors` has only changed the country variable. The continent variable remains vector.
+Now `die_factors` has only changed the country variable. The continent variable remains a factor
 
 ``` r
 str(my_new_df)
@@ -97,7 +97,7 @@ str(my_new_df)
 #>  $ gdpPercap: num  779 821 853 836 740 ...
 ```
 
-You can tell `die_factors` to not target a variable by putting a minus sign before a variable name or column number. You'll notice that `die_factors` gives you message indicating that some of the variable that were targeted were not factors and that those variables will remnain unchange. This is because `die_factors` is targeting all of the variables except the country variable.
+You can tell `die_factors` to not target a variable by putting a minus sign before a variable name or column number. You'll notice that `die_factors` gives you message indicating that some of the variable that were targeted were not factors and that those variables will remain unchanged. This is because `die_factors` is targeting all of the variables except the country variable.
 
 ``` r
 my_new_df <- die_factors(gapminder, "-country")
