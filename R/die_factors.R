@@ -2,13 +2,21 @@
 #'
 #' Converts all factor variables in a given dataframe to character variables.
 #'
-#' @param x
-#' @param targets
+#' @param x A dataframe.
+#' @param targets The names of factor variables to be converted into character variables.
 #'
-#' @return tbl_df
+#' @return tbl_df A dataframe with all (or the targetted) factor variables converted to character variables.
 #' @export
 #'
-#' @examples die_factors(iris), die_factors(iris, "Species"), die_factors(iris, 5)
+#' @examples
+#' #Convert all the factor variables in the dataframe to character variabels.
+#' die_factors(iris)
+#'
+#' #Convert only the Species variable into a character.
+#' die_factors(iris, "Species")
+#'
+#' #Convert only the variable at column 5 into a character
+#' die_factors(iris, 5)
 #' @importFrom dplyr %>%
 die_factors <- function(x, targets = NULL) {
   stopifnot(is.data.frame(x) & (is.null(targets)|is.numeric(targets)|is.character(targets)))
@@ -21,14 +29,19 @@ die_factors <- function(x, targets = NULL) {
     if (is.character(targets)) {
       if(any(stringr::str_detect(targets, "-"))){
         vars_to_select <- (match(stringr::str_replace_all(targets, "-", ""),
-                                 names(x)))*-1
-      }
+                                 names(x)))
+        if (any(is.na(vars_to_select))) {stop("Oh no, some of the variables you targetted do not exist!")}
+      vars_to_select <- vars_to_select*-1
+        }
       else {
         vars_to_select <- match(targets, names(x))
+        if (any(is.na(vars_to_select))) {stop("Oh no, some of the variables you targetted do not exist!")}
       }
     }
     else {
       vars_to_select <- targets
+      if (any(abs(vars_to_select) > ncol(x))) {stop("Oh no, some of the variables you targetted do not exist!")}
+
     }
     df_vars_to_change <- x %>% dplyr::select(vars_to_select)
     df_vars_to_ignore <- x %>% dplyr::select(vars_to_select*-1)

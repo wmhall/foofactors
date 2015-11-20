@@ -7,17 +7,24 @@
 die_factors(x, targets = NULL)
 }
 \arguments{
-\item{x}{}
+\item{x}{A dataframe.}
 
-\item{targets}{}
+\item{targets}{The names of factor variables to be converted into character variables.}
 }
 \value{
-tbl_df
+tbl_df A dataframe with all (or the targetted) factor variables converted to character variables.
 }
 \description{
 Converts all factor variables in a given dataframe to character variables.
 }
 \examples{
-die_factors(iris), die_factors(iris, "Species"), die_factors(iris, 5)
+#Convert all the factor variables in the dataframe to character variabels.
+die_factors(iris)
+
+#Convert only the Species variable into a character.
+die_factors(iris, "Species")
+
+#Convert only the variable at column 5 into a character
+die_factors(iris, 5)
 }
 
