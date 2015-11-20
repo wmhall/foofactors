@@ -137,7 +137,7 @@ str(my_new_df)
 #>  $ gdpPercap: num  779 821 853 836 740 ...
 ```
 
-Finally, you can pass `die_factors` groups of variables to taget. The variables can be specified by name.
+Finally, you can pass `die_factors` groups of variables to target. The variables can be specified by name.
 
 ``` r
 my_new_df <- die_factors(gapminder, c("country", "year", "continent"))
