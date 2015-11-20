@@ -14,8 +14,8 @@ Installation
 #devtools::install_github("wmhall/foofactors")
 ```
 
-Examples
-========
+`die_factors` Examples
+======================
 
 The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables.
 
@@ -222,7 +222,7 @@ die_factors(gapminder, "-country")
 #> ..         ...       ...   ...     ...      ...       ...
 ```
 
-Finally, if you target a group of variables and some of them are not factors, `die_factors` will only convert the variable that are factors to character variables and will provide a friendly message indicating that some of the variable were not modified because they are not factors.
+Finally, if you target a group of variables and some of the variables are not factors, `die_factors` will only convert the variable that are factors to character variables and will provide a friendly message indicating that some of the variable were not modified because they are not factors.
 
 ``` r
 tbl_df(gapminder)
