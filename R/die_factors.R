@@ -1,3 +1,15 @@
+#' Kill factors in dataframe
+#'
+#' Converts all factors in a given dataframe to characters.
+#'
+#' @param x
+#' @param targets
+#'
+#' @return tbl_df
+#' @export
+#'
+#' @examples die_factors(iris), die_factors(iris, "Species"), die_factors(iris, 5)
+#' @importFrom dplyr %>%
 die_factors <- function(x, y = NULL) {
   stopifnot(is.data.frame(x) & (is.null(y)|is.numeric(y)|is.character(y)))
   vars_to_select <- y

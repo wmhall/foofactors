@@ -14,17 +14,67 @@ knitr::opts_chunk$set(
 )
 ```
 
-This is a practice package for [STAT 545](http://stat545-ubc.github.io).
+This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
 
-This is just the demo Jenny is posting for students to consult / start with for their homework.
+I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
 
-Here's how to use the `foofactors` package.
+`die_factors` takes factors in a dataframe and convert them to characters. The default functionality is to take all the factors in a given dataframe and convert them to characters. You can target (and ignore) factor variables by specifying the variable names when calling the function. 
 
+`live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function. 
+
+#Installation
 
 ```{r}
-#install_github("STAT545/foofactors")
-library(foofactors)
-fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-freq_out(iris$Species)
+#devtools::install_github("wmhall/foofactors")
 ```
+
+#`die_factors` Examples
+
+The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables.
+
+```{r}
+library(foofactors)
+library(gapminder)
+library(dplyr)
+
+tbl_df(gapminder)
+die_factors(gapminder)
+```
+
+You can target specific variables to convert into factors by specifying the variable names when calling the `die_factors`
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, "country")
+```
+
+You can also specify factors using the numerical column positions. 
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, 1)
+```
+
+You can ignore a factor by using the minus sign in front of you column specification. For example, the below code will convert all factor variables to character variables, except the first column. 
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, -1)
+```
+
+You can also ignore a variable by appending a minus sign to the variable name that you would like to ignore. For example, you can tell `die_factors` to not convert the country variable to a character with the following command.
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, "-country")
+```
+
+Finally, if you target a group of variables and some of the variables are not factors,  `die_factors` will only convert the variable that are factors to character variables and will provide a friendly message indicating that some of the variable were not modified because they are not factors.
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, c("country", "year", "continent"))
+
+```
+
 

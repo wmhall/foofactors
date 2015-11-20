@@ -1,6 +1,6 @@
 ---
 title: "Intro to foofactors"
-author: "Jenny Bryan"
+author: "William Hall"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,61 +9,67 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Throwing stuff from the README in here!
+This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
+
+I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
+
+`die_factors` takes factors in a dataframe and convert them to characters. The default functionality is to take all the factors in a given dataframe and convert them to characters. You can target (and ignore) factor variables by specifying the variable names when calling the function. 
+
+`live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function. 
+
+#Installation
 
 ```{r}
-#install_github("STAT545/foofactors")
+#devtools::install_github("wmhall/foofactors")
+```
+
+#`die_factors` Examples
+
+The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables.
+
+```{r}
 library(foofactors)
-fbind(iris$Species[c(1, 51, 101)], PlantGrowth$group[c(1, 11, 21)])
-freq_out(iris$Species)
+library(gapminder)
+library(dplyr)
+
+tbl_df(gapminder)
+die_factors(gapminder)
 ```
 
-Boilerplate content below ...
+You can target specific variables to convert into factors by specifying the variable names when calling the `die_factors`
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, "country")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+You can also specify factors using the numerical column positions. 
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, 1)
 ```
 
-Also a quote using `>`:
+You can ignore a factor by using the minus sign in front of you column specification. For example, the below code will convert all factor variables to character variables, except the first column. 
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, -1)
+```
+
+You can also ignore a variable by appending a minus sign to the variable name that you would like to ignore. For example, you can tell `die_factors` to not convert the country variable to a character with the following command.
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, "-country")
+```
+
+Finally, if you target a group of variables and some of the variables are not factors,  `die_factors` will only convert the variable that are factors to character variables and will provide a friendly message indicating that some of the variable were not modified because they are not factors.
+
+```{r}
+tbl_df(gapminder)
+die_factors(gapminder, c("country", "year", "continent"))
+
+```
+
+

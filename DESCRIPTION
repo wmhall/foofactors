@@ -1,14 +1,14 @@
 Package: foofactors
 Title: Make factors less annoying
 Version: 0.0.0.9000
-Authors@R: person("Jennifer", "Bryan", role=c("aut", "cre"),
-  email = "jenny@stat.ubc.ca")
+Authors@R: person("William", "Hall", role=c("aut", "cre"),
+  email = "wmhall@psych.ubc.ca")
 Description: Factors have driven people to extreme measures, like ordering
     custom conference ribbons and laptop stickers to express how HELLNO we
     feel about stringsAsFactors. And yet, sometimes you need them. Can they
     be made less maddening? Let's find out.
-Depends: 
-    R (>= 3.2.2)
+Depends:
+    R (>= 3.2.1)
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 5.0.1.9000
@@ -19,6 +19,6 @@ Imports: dplyr,
     purrr,
     data.table,
     stringr
-URL: https://github.com/STAT545-UBC/foofactors
-BugReports: https://github.com/STAT545-UBC/foofactors/issues
+URL: https://github.com/wmhall/foofactors
+BugReports: https://github.com/wmhall/foofactors/issues
 VignetteBuilder: knitr
