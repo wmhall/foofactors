@@ -1,6 +1,6 @@
 #' Kill factors in dataframe
 #'
-#' Converts all factors in a given dataframe to characters.
+#' Converts all factor variables in a given dataframe to character variables.
 #'
 #' @param x
 #' @param targets
