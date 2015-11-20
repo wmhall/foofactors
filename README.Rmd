@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+# foofactors
+
 This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
 
 I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
@@ -22,17 +24,17 @@ I added two new functions to the `foofactors` package: `die_factors` and `live_f
 
 `live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function. 
 
-#Installation
+##Installation
 
-```{r}
-#devtools::install_github("wmhall/foofactors")
+```{r, eval = FALSE}
+devtools::install_github("wmhall/foofactors")
 ```
 
-#`die_factors` Examples
+##`die_factors` usage
 
 The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables. Start by loading the `foofactors` package and the `gapminder` package.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(foofactors)
 library(gapminder)
 ```

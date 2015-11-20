@@ -1,4 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+foofactors
+==========
+
 This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
 
 I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
@@ -8,21 +11,20 @@ I added two new functions to the `foofactors` package: `die_factors` and `live_f
 `live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function.
 
 Installation
-============
+------------
 
 ``` r
-#devtools::install_github("wmhall/foofactors")
+devtools::install_github("wmhall/foofactors")
 ```
 
-`die_factors` Examples
-======================
+`die_factors` usage
+-------------------
 
 The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables. Start by loading the `foofactors` package and the `gapminder` package.
 
 ``` r
 library(foofactors)
 library(gapminder)
-#> Warning: package 'gapminder' was built under R version 3.2.2
 ```
 
 If we take a look at the `gapminder` data we see there are two factor variables: country and continent.
