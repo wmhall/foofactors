@@ -6,7 +6,7 @@ This is a package for [STAT 545](http://stat545-ubc.github.io) homework 8.
 
 I added two new functions to the `foofactors` package: `die_factors` and `live_factors`
 
-`die_factors` takes factors in a dataframe and convert them to characters. The default functionality is to take all the factors in a given dataframe and convert them to characters. You can target (and ignore) factor variables by specifying the variable names when calling the function.
+`die_factors` takes factors variables in a dataframe and convert them to characters variables. The default functionality is to take all the factor variables in a given dataframe and convert them to character variables. You can target (and ignore) factor variables by specifying the variable names when calling the function.
 
 `live_factors` takes characters in a dataframe and convert them to factors. Like `die_factors`, you can target (and ignore) character variables by specifying the variable namess when calling the function.
 
