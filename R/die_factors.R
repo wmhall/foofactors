@@ -10,25 +10,25 @@
 #'
 #' @examples die_factors(iris), die_factors(iris, "Species"), die_factors(iris, 5)
 #' @importFrom dplyr %>%
-die_factors <- function(x, y = NULL) {
-  stopifnot(is.data.frame(x) & (is.null(y)|is.numeric(y)|is.character(y)))
-  vars_to_select <- y
-  if (is.null(y)){
+die_factors <- function(x, targets = NULL) {
+  stopifnot(is.data.frame(x) & (is.null(targets)|is.numeric(targets)|is.character(targets)))
+  vars_to_select <- targets
+  if (is.null(targets)){
     df_to_return <- x %>% purrr::map_if(is.factor, as.character) %>% dplyr::tbl_df()
     return(dplyr::tbl_df(data.table::setcolorder(df_to_return, names(x))))
   }
   else {
-    if (is.character(y)) {
-      if(any(stringr::str_detect(y, "-"))){
-        vars_to_select <- (match(stringr::str_replace_all(y, "-", ""),
+    if (is.character(targets)) {
+      if(any(stringr::str_detect(targets, "-"))){
+        vars_to_select <- (match(stringr::str_replace_all(targets, "-", ""),
                                  names(x)))*-1
       }
       else {
-        vars_to_select <- match(y, names(x))
+        vars_to_select <- match(targets, names(x))
       }
     }
     else {
-      vars_to_select <- y
+      vars_to_select <- targets
     }
     df_vars_to_change <- x %>% dplyr::select(vars_to_select)
     df_vars_to_ignore <- x %>% dplyr::select(vars_to_select*-1)

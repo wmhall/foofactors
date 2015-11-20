@@ -4,7 +4,7 @@
 \alias{die_factors}
 \title{Kill factors in dataframe}
 \usage{
-die_factors(x, y = NULL)
+die_factors(x, targets = NULL)
 }
 \arguments{
 \item{x}{}
