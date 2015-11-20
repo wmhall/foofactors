@@ -30,51 +30,88 @@ I added two new functions to the `foofactors` package: `die_factors` and `live_f
 
 #`die_factors` Examples
 
-The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables.
+The following example uses foofactor to convert all the factor variables in the gapminder data frame into character variables. Start by loading the `foofactors` package and the `gapminder` package.
 
 ```{r}
 library(foofactors)
 library(gapminder)
-library(dplyr)
-
-tbl_df(gapminder)
-die_factors(gapminder)
 ```
 
-You can target specific variables to convert into factors by specifying the variable names when calling the `die_factors`
+If we take a look at the `gapminder` data we see there are two factor variables: country and continent. 
 
 ```{r}
-tbl_df(gapminder)
-die_factors(gapminder, "country")
+str(gapminder)
 ```
 
-You can also specify factors using the numerical column positions. 
+We can convert all the factor variables into character variables with the `die_factors` function. 
 
 ```{r}
-tbl_df(gapminder)
-die_factors(gapminder, 1)
+my_new_df <- die_factors(gapminder)
 ```
 
-You can ignore a factor by using the minus sign in front of you column specification. For example, the below code will convert all factor variables to character variables, except the first column. 
+To check it worked we can use the str() function. You can see that the country and continent variables are now character variables. 
 
 ```{r}
-tbl_df(gapminder)
-die_factors(gapminder, -1)
+str(my_new_df)
 ```
 
-You can also ignore a variable by appending a minus sign to the variable name that you would like to ignore. For example, you can tell `die_factors` to not convert the country variable to a character with the following command.
+
+We can target specific variables with `die_factors` by specifying them by name. 
 
 ```{r}
-tbl_df(gapminder)
-die_factors(gapminder, "-country")
+my_new_df <- die_factors(gapminder, "country")
 ```
 
-Finally, if you target a group of variables and some of the variables are not factors,  `die_factors` will only convert the variable that are factors to character variables and will provide a friendly message indicating that some of the variable were not modified because they are not factors.
+Now `die_factors` has only changed the country variable. The continent variable remains vector. 
 
 ```{r}
-tbl_df(gapminder)
-die_factors(gapminder, c("country", "year", "continent"))
-
+str(my_new_df)
 ```
 
+We can also target variables using the numeric column numbers. 
 
+```{r}
+my_new_df <- die_factors(gapminder, 2)
+```
+
+`die_factors` has only changed the continent variable. 
+
+```{r}
+str(my_new_df)
+```
+
+You can tell `die_factors` to not target a variable by putting a minus sign before a variable name or column number. You'll notice that `die_factors` gives you message indicating that some of the variable that were targeted were not factors and that those variables will remnain unchange. This is because `die_factors` is targeting all of the variables except the country variable. 
+
+```{r}
+my_new_df <- die_factors(gapminder, "-country")
+```
+
+You can see that only the continent variable was changed. 
+
+```{r}
+str(my_new_df)
+```
+
+You can do the same thing by putting a minus sign in front of numerical column positions.
+
+```{r}
+my_new_df <- die_factors(gapminder, -1)
+```
+
+Only the continent variable has been changed.
+
+```{r}
+str(my_new_df)
+```
+
+Finally, you can pass `die_factors` groups of variables to taget. The variables can be specified by name. 
+
+```{r}
+my_new_df <- die_factors(gapminder, c("country", "year", "continent"))
+```
+
+You'll see that country and continent were changed to character variables but year remains unchanged. Year is not changed because it is not a factor.
+
+```{r}
+str(my_new_df)
+```
